@@ -92,14 +92,14 @@ userInput.addEventListener("input", () => {
         const endTime = new Date();
         const timeTaken = (endTime - startTime) / 1000; // Time in seconds
         const wpm = Math.round((targetText.split(" ").length / timeTaken) * 60);
-
+        if(wpm<400){
+            window.location.href = "evil_results.html";
+        }
         // Save results to sessionStorage
         sessionStorage.setItem("wpm", wpm);
         sessionStorage.setItem("time", timeTaken.toFixed(2));
         sessionStorage.setItem("errors", errors);
-        if(wpm<400){
-            window.location.href = "evil_results.html";
-    }
+
 });
 
 // Select all buttons in the virtual keyboard
