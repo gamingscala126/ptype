@@ -91,7 +91,7 @@ userInput.addEventListener("input", () => {
     if (typedText.length === targetText.length) {
         const endTime = new Date();
         const timeTaken = (endTime - startTime) / 1000; // Time in seconds
-        const wpm = Math.round((targetText.split(" ").length / timeTaken) * 60);
+        var wpm = Math.round((targetText.split(" ").length / timeTaken) * 60);
         if(wpm<400){
             window.location.href = "evil_results.html";
         }
