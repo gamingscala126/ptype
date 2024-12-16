@@ -639,6 +639,7 @@ textarea {
 
 
 .trRestart {
+  position: absolute;
   font-size: 1.5rem;
   color: #ff9800;
   text-transform: uppercase;
