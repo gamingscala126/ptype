@@ -92,9 +92,13 @@ userInput.addEventListener("input", () => {
         const endTime = new Date();
         const timeTaken = (endTime - startTime) / 1000; // Time in seconds
         var wpm = Math.round((targetText.split(" ").length / timeTaken) * 60);
-        if(wpm<400){
+      if(timeTaken === 0)
+      {
+        window.location.href = "dddd.html";
+      }
+      else{
             window.location.href = "evil_results.html";
-        }
+      }
         // Save results to sessionStorage
         sessionStorage.setItem("wpm", wpm);
         sessionStorage.setItem("time", timeTaken.toFixed(2));
