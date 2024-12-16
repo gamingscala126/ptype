@@ -74,7 +74,7 @@
         const wpm = sessionStorage.getItem('wpm');
         const time = sessionStorage.getItem('time');
         const errors = sessionStorage.getItem('errors');
-        var score = Math.trunc((((wpm+1)*5)/(Math.sqrt((errors+1)))*0.3)*1.66);
+        var score = Math.trunc((((wpm+1)*5)/(Math.sqrt((errors+1)))*0.3)*1.75);
 
         document.getElementById('wpm-result').innerText = `Words Per Minute (WPM): ${wpm}`;
         document.getElementById('time-result').innerText = `Time Taken: ${time} seconds`;
