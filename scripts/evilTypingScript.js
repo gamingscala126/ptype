@@ -92,7 +92,13 @@ userInput.addEventListener("input", () => {
         const endTime = new Date();
         const timeTaken = (endTime - startTime) / 1000; // Time in seconds
         const wpm = Math.round((targetText.split(" ").length / timeTaken) * 60);
-
+        if(isNaN(wpm))
+        {
+          window.location.href = "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.1GEQt01XBNY1CYrXoQYXCgAAAA%26pid%3DApi&f=1&ipt=7008d839ee29af6a925aeb9af345b0223a16d4f2a7688688202c0a2b2eb506bb&ipo=images"
+          {
+            else{
+                      window.location.href = "evil_results.html";
+            }
         // Save results to sessionStorage
         sessionStorage.setItem("wpm", wpm);
         sessionStorage.setItem("time", timeTaken.toFixed(2));
