@@ -97,6 +97,7 @@ userInput.addEventListener("input", () => {
         sessionStorage.setItem("wpm", wpm);
         sessionStorage.setItem("time", timeTaken.toFixed(2));
         sessionStorage.setItem("errors", errors);
+        if(wpm<400){
             window.location.href = "evil_results.html";
     }
 });
