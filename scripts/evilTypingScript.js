@@ -92,7 +92,7 @@ userInput.addEventListener("input", () => {
         const endTime = new Date();
         const timeTaken = (endTime - startTime) / 1000; // Time in seconds
         var wpm = Math.round((targetText.split(" ").length / timeTaken) * 60);
-      if(timeTaken === 0)
+      if(timeTaken < 5)
       {
         window.location.href = "dddd.html";
       }
