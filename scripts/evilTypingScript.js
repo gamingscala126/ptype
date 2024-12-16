@@ -92,17 +92,12 @@ userInput.addEventListener("input", () => {
         const endTime = new Date();
         const timeTaken = (endTime - startTime) / 1000; // Time in seconds
         const wpm = Math.round((targetText.split(" ").length / timeTaken) * 60);
-        if(isNaN(wpm))
-        {
-          window.location.href = "dddd.html";
-          {
-            else{
-                      window.location.href = "evil_results.html";
-            }
+
         // Save results to sessionStorage
         sessionStorage.setItem("wpm", wpm);
         sessionStorage.setItem("time", timeTaken.toFixed(2));
         sessionStorage.setItem("errors", errors);
+            window.location.href = "evil_results.html";
     }
 });
 
