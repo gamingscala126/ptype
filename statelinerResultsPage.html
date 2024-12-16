@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Typing Results</title>
+    <link rel="stylesheet" href="stateliner.css">
+</head>
+<body>
+    <div class="results-page">
+        <h1>Results</h1>
+        <p id="wpm-result"></p>
+        <p id="time-result"></p>
+        <p id="error-result"></p>
+        <a href="stateliner_theme.html" class="restart-btn">Restart</a>
+    </div>
+    <script>
+        // Load results from sessionStorage
+        const wpm = sessionStorage.getItem('wpm');
+        const time = sessionStorage.getItem('time');
+        const errors = sessionStorage.getItem('errors');
+
+        document.getElementById('wpm-result').innerText = `Words Per Minute (WPM): ${wpm}`;
+        document.getElementById('time-result').innerText = `Time Taken: ${time} seconds`;
+        document.getElementById('error-result').innerText = `Errors: ${errors}`;
+    </script>
+</body>
+</html>

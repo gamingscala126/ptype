@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Typing Results</title>
+    <link rel="stylesheet" href="tiger.css">
+</head>
+<body>
+    <div class="banner">
+        <a href="index.html" class="ptype-logo">
+            <button class="ptype-button" data-text="ptype">
+              <span class="actual-text">&nbsp;ptype&nbsp;</span>
+              <span aria-hidden="true" class="hover-text">&nbsp;ptype&nbsp;</span>
+            </button>
+          </a>
+        <div class="header">
+            <a href="settings.html" class="Tbutton">
+            <button class="Tbutton">
+                
+              <svg
+                class="settings-btn"
+                xmlns="http://www.w3.org/2000/svg"
+                height="24"
+                viewBox="0 -960 960 960"
+                width="24"
+                fill="#e8eaed"
+              >
+                <path
+                  d="m370-80-16-128q-13-5-24.5-12T307-235l-119 50L78-375l103-78q-1-7-1-13.5v-27q0-6.5 1-13.5L78-585l110-190 119 50q11-8 23-15t24-12l16-128h220l16 128q13 5 24.5 12t22.5 15l119-50 110 190-103 78q1 7 1 13.5v27q0 6.5-2 13.5l103 78-110 190-118-50q-11 8-23 15t-24 12L590-80H370Zm70-80h79l14-106q31-8 57.5-23.5T639-327l99 41 39-68-86-65q5-14 7-29.5t2-31.5q0-16-2-31.5t-7-29.5l86-65-39-68-99 42q-22-23-48.5-38.5T533-694l-13-106h-79l-14 106q-31 8-57.5 23.5T321-633l-99-41-39 68 86 64q-5 15-7 30t-2 32q0 16 2 31t7 30l-86 65 39 68 99-42q22 23 48.5 38.5T427-266l13 106Zm42-180q58 0 99-41t41-99q0-58-41-99t-99-41q-59 0-99.5 41T342-480q0 58 40.5 ```html
+          99t99.5 41Zm-2-140Z"
+                ></path>
+              </svg>
+              <span class="tooltip">settings</span>
+            </button>
+            </a>
+          </div>
+    </div>
+    <div class="results-page">
+        <h1>Results</h1>
+        <p id="wpm-result"></p>
+        <p id="time-result"></p>
+        <p id="error-result"></p>
+    </div>
+    </div>
+    
+  <a href="index.html">
+    <button class ='trRestart'>Restart</button>
+    </a>
+    <div id="score"></div>
+    <div class="scoreboard">
+    <div class="score-bar-container">
+      <!-- This is the actual progress bar, width will change dynamically -->
+      <div class="score-bar" id="scoreBar" style="width: 0%">0%</div>
+    </div>
+  </div>
+  <div id="rank">Rank</div>
+<div class="ranks">
+  <div>Ranks:</div>
+  <div id="rank-list1">Z-Rank 0-2000</div>
+  <div id="rank-list2">P-Rank 2000-4000</div>
+  <div id="rank-list3">Dieter-Rank 4000-6000</div>
+  <div id="rank-list4">Tom Z-Rank 6000-8000</div>
+  <div id="rank-list5">Scala-Rank 8000-10000</div>
+  <div id="rank-list6">FREAK-Rank 10000+</div>
+  <div id="rank-list7">???</div>
+</div>
+  <script>
+      // Example score from a test, you can replace this with any dynamic value
+
+        // Load results from sessionStorage
+        const wpm = sessionStorage.getItem('wpm');
+        const time = sessionStorage.getItem('time');
+        const errors = sessionStorage.getItem('errors');
+        var score = Math.trunc((((wpm+1)*5)/Math.sqrt((errors+1)))*2.3);
+
+        document.getElementById('wpm-result').innerText = `Words Per Minute (WPM): ${wpm}`;
+        document.getElementById('time-result').innerText = `Time Taken: ${time} seconds`;
+        document.getElementById('error-result').innerText = `Errors: ${errors}`;
+        document.getElementById('score').innerText = `Score: ${score}`;
+        
+// Get the score elements
+const scoreElement = document.getElementById('score');
+const scoreBar = document.getElementById('scoreBar');
+var ranko = document.getElementById('rank')
+var rank = "";
+if(score<2000)
+{
+  rank = "You're rank is: Z-Rank (Lowest Rank, you're terrible give up :sob:)"
+  ranko.style.backgroundColor = "red";
+}
+else if(score<4000)
+{
+  rank = "You're rank is: P-Rank (Lower Rank, but we believe in you... Try harder)"
+  ranko.style.backgroundColor = "orange";
+}
+else if(score<6000)
+{
+  rank = "You're rank is: Dieter-Rank (A glutton always craves more, you're so close to the top)"
+  ranko.style.backgroundColor = "yellow";
+}
+else if(score<8000)
+{
+  rank = "You're rank is: Tom Z-Rank (Your power is felt from miles away. Let's grow them more.)"
+  ranko.style.backgroundColor = "lime";  
+  ranko.style.color = "black";
+
+}
+else if(score<10000)
+{
+  rank = "You're rank is: Scala-Rank (Congratulations, you transcend all other Scalitos.. Wait, you don't?)"
+  ranko.style.backgroundColor = "aqua";
+  ranko.style.color = "black";
+}
+else if(score<12000)
+{
+  rank = "You're rank is: FREAK-Rank (Welcome to the good side, Sean B)"
+  ranko.style.backgroundColor = "violet";
+}
+else if(score>20000)
+{
+  rank = "You're rank is: NOTHING youre a cheater and a loser."
+}
+else
+{
+  rank = "You're rank is: Super secret anti-scalito rank. Only those who are the most powerful shall know about this rank. I have something to share with you, and you may have wondered at some point: What exactly is a scalito? My answer to you is simple: it's nothing you need to know. In fact, I'd rather you pretend you've never even heard of it. But if your curiosity can't be shaken, I'll leave you with this: delve into the Tom P theme and type the word scalito ten times in a row (with spaces in between of course). Only then will you uncover the truth, but trust me- some truths are better left hidden.";
+  ranko.style.backgroundColor = "white";
+  ranko.style.fontSize = "20px";
+  ranko.style.color = "black";
+}
+          
+document.getElementById('rank').innerText = `Rank: ${rank}`;
+
+// Set the displayed score
+scoreElement.textContent = score;
+
+// Calculate the width percentage based on the score (out of 100)
+
+// Update the width of the score bar based on the calculated percentage
+scoreBar.style.width = (score/100)*0.9 + '%';
+
+// Also update the text inside the bar (optional)
+scoreBar.textContent = score;
+
+    </script>
+</body>
+</html>

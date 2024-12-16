@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Eater&family=Jaro:opsz@6..72&family=Lacquer&family=Press+Start+2P&family=Rubik+Moonrocks&family=Rye&display=swap" rel="stylesheet"><head>
+  <html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>tomP</title>
+    <link rel="stylesheet" href="tomp.css">
+</head>
+<body>
+    <div class="banner">
+        <a href="tomp_theme.html" class="ptype-logo">
+            <button class="ptype-button" data-text="">
+              <span class="actual-text", id="scala">&nbsp;tomP&nbsp;</span>
+              <span aria-hidden="true" class="hover-text">&nbsp;tomP&nbsp;</span>
+            </button>
+          </a>
+        <div class="header">
+            <a href="settings.html" class="Tbutton">
+            <button class="Tbutton">
+                
+              <svg
+                class="settings-btn"
+                xmlns="http://www.w3.org/2000/svg"
+                height="24"
+                viewBox="0 -960 960 960"
+                width="24"
+                fill="#e8eaed"
+              >
+                <path
+                  d="m370-80-16-128q-13-5-24.5-12T307-235l-119 50L78-375l103-78q-1-7-1-13.5v-27q0-6.5 1-13.5L78-585l110-190 119 50q11-8 23-15t24-12l16-128h220l16 128q13 5 24.5 12t22.5 15l119-50 110 190-103 78q1 7 1 13.5v27q0 6.5-2 13.5l103 78-110 190-118-50q-11 8-23 15t-24 12L590-80H370Zm70-80h79l14-106q31-8 57.5-23.5T639-327l99 41 39-68-86-65q5-14 7-29.5t2-31.5q0-16-2-31.5t-7-29.5l86-65-39-68-99 42q-22-23-48.5-38.5T533-694l-13-106h-79l-14 106q-31 8-57.5 23.5T321-633l-99-41-39 68 86 64q-5 15-7 30t-2 32q0 16 2 31t7 30l-86 65 39 68 99-42q22 23 48.5 38.5T427-266l13 106Zm42-180q58 0 99-41t41-99q0-58-41-99t-99-41q-59 0-99.5 41T342-480q0 58 40.5 ```html
+          99t99.5 41Zm-2-140Z"
+                ></path>
+              </svg>
+              <span class="tooltip">settings</span>
+            </button>
+            </a>
+          </div>
+    </div>
+    <div class="typing-game">
+        
+        <div id="text-to-type"></div>
+        
+        <textarea id="user-input" autocomplete="off"></textarea>
+    </div>
+    <script src="scripts/tompTypingScript.js"></script>
+    <script>
+      // Characters to choose from
+      const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()';
+
+      // Function to generate a random character
+      function getRandomCharacter() {
+        const randomIndex = Math.floor(Math.random() * characters.length);
+        return characters[randomIndex];
+      }
+
+      // Function to change the text of the div randomly
+      function changeTextRandomly() {
+          const textElement = document.getElementById('text-to-type');
+          let currentText = textElement.textContent;
+
+          // Create a new random string by replacing each character
+          let newText = '';
+          for (let i = 0; i < currentText.length; i++) {
+              newText += getRandomCharacter();
+          }
+
+          // Update the text content of the div
+          textElement.textContent = newText;
+      }
+      function changeTompRandomly() {
+          const textElement = document.getElementById('scala');
+          let currentText = textElement.textContent;
+
+          // Create a new random string by replacing each character
+          let newText = '';
+          for (let i = 0; i < currentText.length; i++) {
+              newText += getRandomCharacter();
+          }
+
+          // Update the text content of the div
+          textElement.textContent = newText;
+      }
+
+      // Start the random character change every 5 milliseconds
+      setInterval(changeTextRandomly, 5);  // Adjust the time for different speeds
+      setInterval(changeTompRandomly, 5);  // Adjust the time for different speeds
+  </script>
+    <section class="screen-keyboard-desktop">
+        <div class="keys">
+            <!-- Row 1 -->
+            <button class="accent" data-key="`">`</button>
+            <button class="accent" data-key="1">1</button>
+            <button class="accent" data-key="2">2</button>
+            <button class="accent" data-key="3">3</button>
+            <button class="accent" data-key="4">4</button>
+            <button class="accent" data-key="5">5</button>
+            <button class="accent" data-key="6">6</button>
+            <button class="accent" data-key="7">7</button>
+            <button class="accent" data-key="8">8</button>
+            <button class="accent" data-key="9">9</button>
+            <button class="accent" data-key="0">0</button>
+            <button class="accent" data-key="-">-</button>
+            <button class="accent" data-key="=">=</button>
+            <button class="accent special" data-key="Backspace">Backspace</button>
+    
+            <!-- Row 2 -->
+            <button class="accent special" data-key="Tab">Tab</button>
+            <button data-key="q">q</button>
+            <button data-key="w">w</button>
+            <button data-key="e">e</button>
+            <button data-key="r">r</button>
+            <button data-key="t">t</button>
+            <button data-key="y">y</button>
+            <button data-key="u">u</button>
+            <button data-key="i">i</button>
+            <button data-key="o">o</button>
+            <button data-key="p">p</button>
+            <button data-key="[">[</button>
+            <button data-key="]">]</button>
+            
+    
+            <!-- Row 3 -->
+            <button class="accent special" data-key="CapsLock">CapsLock</button>
+            <button data-key="a">a</button>
+            <button data-key="s">s</button>
+            <button data-key="d">d</button>
+            <button data-key="f">f</button>
+            <button data-key="g">g</button>
+            <button data-key="h">h</button>
+            <button data-key="j">j</button>
+            <button data-key="k">k</button>
+            <button data-key="l">l</button>
+            <button data-key=";">;</button>
+            <button data-key="'">'</button>
+            <button class="accent special" data-key="Enter">Enter</button>
+    
+            <!-- Row 4 -->
+            <button class="accent special" data-key="Shift">Shift</button>
+            <button data-key="z">z</button>
+            <button data-key="x">x</button>
+            <button data-key="c">c</button>
+            <button data-key="v">v</button>
+            <button data-key="b">b</button>
+            <button data-key="n">n</button>
+            <button data-key="m">m</button>
+            <button data-key=",">,</button>
+            <button data-key=".">.</button>
+            <button data-key="/">/</button>
+            <button class="accent special" data-key="Shift">Shift</button>
+    
+            <!-- Row 5 -->
+            <button class="accent special" data-key="Ctrl">Ctrl</button>
+            <button class="accent special" data-key="Win">Win</button>
+            <button class="accent special" data-key="Alt">Alt</button>
+            <button class="space special" data-key="Space"></button>
+            <button class="accent special" data-key="Alt">Alt</button>
+            <button class="accent special" data-key="Ctrl">Ctrl</button>
+        </div>
+    </section>
+</body>
+</html>
+
+

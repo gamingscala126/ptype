@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Eater&display=swap" rel="stylesheet">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ptype</title>
+    <link rel="stylesheet" href="tiger.css">
+</head>
+<body>
+    <div class="banner">
+        <a href="index.html" class="ptype-logo">
+            <button class="ptype-button" data-text="ptype">
+              <span class="actual-text">&nbsp;ptype&nbsp;</span>
+              <span aria-hidden="true" class="hover-text">&nbsp;ptype&nbsp;</span>
+            </button>
+          </a>
+        <div class="header">
+            <a href="settings.html" class="Tbutton">
+            <button class="Tbutton">
+                
+              <svg
+                class="settings-btn"
+                xmlns="http://www.w3.org/2000/svg"
+                height="24"
+                viewBox="0 -960 960 960"
+                width="24"
+                fill="#e8eaed"
+              >
+                <path
+                  d="m370-80-16-128q-13-5-24.5-12T307-235l-119 50L78-375l103-78q-1-7-1-13.5v-27q0-6.5 1-13.5L78-585l110-190 119 50q11-8 23-15t24-12l16-128h220l16 128q13 5 24.5 12t22.5 15l119-50 110 190-103 78q1 7 1 13.5v27q0 6.5-2 13.5l103 78-110 190-118-50q-11 8-23 15t-24 12L590-80H370Zm70-80h79l14-106q31-8 57.5-23.5T639-327l99 41 39-68-86-65q5-14 7-29.5t2-31.5q0-16-2-31.5t-7-29.5l86-65-39-68-99 42q-22-23-48.5-38.5T533-694l-13-106h-79l-14 106q-31 8-57.5 23.5T321-633l-99-41-39 68 86 64q-5 15-7 30t-2 32q0 16 2 31t7 30l-86 65 39 68 99-42q22 23 48.5 38.5T427-266l13 106Zm42-180q58 0 99-41t41-99q0-58-41-99t-99-41q-59 0-99.5 41T342-480q0 58 40.5 ```html
+          99t99.5 41Zm-2-140Z"
+                ></path>
+              </svg>
+              <span class="tooltip">settings</span>
+            </button>
+            </a>
+          </div>
+    </div>
+    <div class="rounded-box">
+      <div class="button-container">
+        <!-- Quote Mode -->
+        <div class="mode-group">
+          <label class="checkBox">
+            <input id="quoteMode" type="checkbox" onclick="handleModeSelection('quoteMode')">
+            <div class="transition"></div>
+          </label>
+          <h3>Quote Mode</h3>
+        </div>
+    
+        <!-- P Mode -->
+        <div class="mode-group">
+          <label class="checkBox">
+            <input id="pMode" type="checkbox" onclick="handleModeSelection('pMode')">
+            <div class="transition"></div>
+          </label>
+          <h3>P Mode</h3>
+        </div>
+    
+        <!-- Timed -->
+        <div class="setting-group">
+          <label class="checkBox">
+            <input id="timed" type="checkbox" onclick="handleSettingSelection('timed')">
+            <div class="transition"></div>
+          </label>
+          <h3>Timed</h3>
+        </div>
+    
+        <!-- Words -->
+        <div class="setting-group">
+          <label class="checkBox">
+            <input id="words" type="checkbox" onclick="handleSettingSelection('words')">
+            <div class="transition"></div>
+          </label>
+          <h3>Words</h3>
+        </div>
+      </div>
+      
+    </div>
+    <script>
+  
+
+
+
+
+let currentMode = ''; // Tracks the current mode
+
+function handleModeSelection(selectedId) {
+  const quoteMode = document.getElementById('quoteMode');
+  const pMode = document.getElementById('pMode');
+  const wordsCheckbox = document.getElementById('words');
+  const timeCheckbox = document.getElementById('timed');
+
+  // Handle switching modes
+  if (selectedId === 'quoteMode' && quoteMode.checked) {
+    pMode.checked = false; // Deselect P Mode
+    currentMode = 'quote';
+
+    // Disable and uncheck Words and Timed
+    wordsCheckbox.checked = false;
+    wordsCheckbox.disabled = true;
+    wordsCheckbox.parentElement.style.opacity = 0.5;
+
+    timeCheckbox.checked = false;
+    timeCheckbox.disabled = true;
+    timeCheckbox.parentElement.style.opacity = 0.5;
+  } else if (selectedId === 'pMode' && pMode.checked) {
+    quoteMode.checked = false; // Deselect Quote Mode
+    currentMode = 'p';
+
+    // Enable Words and Timed
+    wordsCheckbox.disabled = false;
+    wordsCheckbox.parentElement.style.opacity = 1;
+
+    timeCheckbox.disabled = false;
+    timeCheckbox.parentElement.style.opacity = 1;
+
+    // Ensure one of Words or Timed is selected
+    if (!wordsCheckbox.checked && !timeCheckbox.checked) {
+      wordsCheckbox.checked = true; // Default to Words
+    }
+  }
+
+  // Ensure there is always a mode selected
+  if (!quoteMode.checked && !pMode.checked) {
+    // If both are deselected, restore the previous mode
+    if (currentMode === 'quote') {
+      quoteMode.checked = true;
+    } else {
+      pMode.checked = true;
+    }
+  }
+
+  // Enforce mutual exclusivity between Words and Timed in P Mode
+  if (pMode.checked) {
+    if (wordsCheckbox.checked && timeCheckbox.checked) {
+      timeCheckbox.checked = false; // Automatically uncheck Timed if Words is checked
+    } else if (!wordsCheckbox.checked && !timeCheckbox.checked) {
+      wordsCheckbox.checked = true; // Ensure at least one is selected
+    }
+
+    // Ensure Words and Timed are mutually exclusive
+    wordsCheckbox.addEventListener('change', () => {
+      if (wordsCheckbox.checked) {
+        timeCheckbox.checked = false;
+      } else if (!timeCheckbox.checked) {
+        timeCheckbox.checked = true; // Ensure at least one is selected
+      }
+    });
+
+    timeCheckbox.addEventListener('change', () => {
+      if (timeCheckbox.checked) {
+        wordsCheckbox.checked = false;
+      } else if (!wordsCheckbox.checked) {
+        wordsCheckbox.checked = true; // Ensure at least one is selected
+      }
+    });
+  }
+  document.getElementById('user-input').value = '';
+  applyModeLogic(); // Apply any additional logic specific to your application
+}
+
+
+
+
+
+function applyModeLogic() {
+  if (currentMode === 'quote') {
+    const quotes = [
+  "the only way to do great work is to love what you do.",
+  "life is what happens when you're busy making other plans.",
+  "in the end, we will remember not the words of our enemies, but the silence of our friends.",
+  "you miss 100% of the shots you don't take.",
+  "it does not matter how slowly you go as long as you do not stop.",
+  "the journey of a thousand miles begins with one step.",
+  "to be yourself in a world that is constantly trying to make you something else is the greatest accomplishment.",
+  "you must be the change you wish to see in the world.",
+  "success is not final, failure is not fatal: it is the courage to continue that counts.",
+  "the only limit to our realization of tomorrow is our doubts of today.",
+  "life isn’t about finding yourself. life is about creating yourself.",
+  "the best way to predict the future is to invent it.",
+  "do what you can, with what you have, where you are.",
+  "believe you can and you're halfway there.",
+  "success is not how high you have climbed, but how you make a positive difference to the world.",
+  "the purpose of life is not to be happy. it is to be useful, to be honorable, to be compassionate, to have it make some difference that you have lived and lived well.",
+  "don’t watch the clock; do what it does. keep going.",
+  "life is really simple, but we insist on making it complicated.",
+  "you only live once, but if you do it right, once is enough.",
+  "the future belongs to those who believe in the beauty of their dreams.",
+  "do not go where the path may lead, go instead where there is no path and leave a trail.",
+  "act as if what you do makes a difference. it does.",
+  "to be great is to be misunderstood.",
+  "you are never too old to set another goal or to dream a new dream.",
+  "our lives begin to end the day we become silent about things that matter.",
+  "do not dwell in the past, do not dream of the future, concentrate the mind on the present moment.",
+  "not all those who wander are lost.",
+  "it always seems impossible until it’s done.",
+  "life isn’t about waiting for the storm to pass, it’s about learning to dance in the rain.",
+  "you can never cross the ocean until you have the courage to lose sight of the shore.",
+  "we do not remember days, we remember moments.",
+  "keep your face always toward the sunshine—and shadows will fall behind you.",
+  "there are no shortcuts to any place worth going.",
+  "if you want to go fast, go alone. if you want to go far, go together.",
+  "the best way out is always through.",
+  "in the middle of every difficulty lies opportunity.",
+  "do one thing every day that scares you.",
+  "happiness is not something ready-made. it comes from your own actions.",
+  "believe in yourself and all that you are. know that there is something inside you that is greater than any obstacle.",
+  "if you can dream it, you can do it.",
+  "life is 10% what happens to us and 90% how we react to it.",
+  "do not wait for leaders; do it alone, person to person.",
+  "it’s not what happens to you, but how you react to it that matters.",
+  "you are enough just as you are.",
+  "everything you can imagine is real.",
+  "love the life you live. live the life you love.",
+  "you must do the things you think you cannot do.",
+  "whether you think you can or you think you can’t, you’re right.",
+  "the only thing standing between you and your goal is the story you keep telling yourself as to why you can’t achieve it.",
+  "what lies behind us and what lies before us are tiny matters compared to what lies within us.",
+  "life is either a daring adventure or nothing at all.",
+  "if you want to live a happy life, tie it to a goal, not to people or things.",
+  "don't judge each day by the harvest you reap but by the seeds that you plant.",
+  "the secret of getting ahead is getting started.",
+  "our greatest glory is not in never falling, but in rising every time we fall.",
+  "the best revenge is massive success.",
+  "in three words i can sum up everything i've learned about life: it goes on.",
+  "life is not measured by the number of breaths we take, but by the moments that take our breath away.",
+  "two things are infinite: the universe and human stupidity; and i'm not sure about the universe.",
+  "this too shall pass.",
+  "the only thing we have to fear is fear itself.",
+  "life is a flower of which love is the honey.",
+  "the only impossible journey is the one you never begin.",
+  "life is short, and it’s up to you to make it sweet.",
+  "the best time to plant a tree was 20 years ago. the second best time is now.",
+  "our job is not to figure out the how, but simply to trust the process.",
+  "the most difficult thing is the decision to act, the rest is merely tenacity.",
+  "don’t let yesterday take up too much of today.",
+  "don’t count the days, make the days count.",
+  "keep going. everything you need will come to you at the perfect time.",
+  "the only way to achieve the impossible is to believe it is possible.",
+  "life is not about waiting for the storm to pass, it’s about learning how to dance in the rain.",
+  "fall seven times, stand up eight.",
+  "success is how high you bounce when you hit bottom.",
+  "you can’t go back and change the beginning, but you can start where you are and change the ending.",
+  "there is no greater agony than bearing an untold story inside you.",
+  "to succeed in life, you need two things: ignorance and confidence.",
+  "everything has beauty, but not everyone sees it.",
+  "the greatest glory in living lies not in never falling, but in rising every time we fall.",
+  "you get in life what you have the courage to ask for.",
+  "life is what we make it, always has been, always will be.",
+  "to live is the rarest thing in the world. most people exist, that is all.",
+  "life can only be understood backwards; but it must be lived forwards.",
+  "don’t let the noise of others’ opinions drown out your own inner voice.",
+  "it is not length of life, but depth of life.",
+  "the purpose of life is not to be happy, but to be useful, to be honorable, to be compassionate, to have it make some difference that you have lived and lived well."
+];
+
+
+
+// DOM Elements
+const textToType = document.getElementById("text-to-type");
+const userInput = document.getElementById("user-input");
+
+
+
+// Initialize Game
+const targetText = quotes[Math.floor(Math.random() * quotes.length)];
+textToType.innerHTML = targetText;
+
+// Variables for Tracking
+let startTime = null;
+let errors = 0;
+
+// Event Listener for Typing
+userInput.addEventListener("input", () => {
+  if (!startTime) startTime = new Date(); // Start timer on first input
+
+  const typedText = userInput.value;
+  let updatedHTML = "";
+  errors = 0;
+
+  for (let i = 0; i < targetText.length; i++) {
+      const correctChar = targetText[i];
+      const typedChar = typedText[i];
+
+      if (typedChar === undefined) {
+          // Not yet typed
+          if (i === typedText.length) {
+            // Add the cursor at the current position
+            updatedHTML += `<span style="border-left: 2px solid #ff9800; padding-left: 1px; margin-left: -1px; display: inline-block; height: 1em;"></span>`;
+            updatedHTML += `<span style="color: #734a00;">${correctChar}</span>`;
+        } else {
+            updatedHTML += `<span style="color: #734a00;">${correctChar}</span>`;
+        }
+      } else if (typedChar === correctChar) {
+          // Correctly typed
+          updatedHTML += `<span style="color: #FFA500;">${correctChar}</span>`;
+      } else {
+          // Incorrectly typed
+          updatedHTML += `<span style="color: #ff4757;">${correctChar}</span>`;
+          errors++;
+      }
+  }
+
+  textToType.innerHTML = updatedHTML;
+
+  // Check if typing is complete
+  if (typedText.length === targetText.length) {
+      const endTime = new Date();
+      const timeTaken = (endTime - startTime) / 1000; // Time in seconds
+      const wpm = Math.round((targetText.split(" ").length / timeTaken) * 60);
+      const score = (timeTaken*100)/Math.sqrt(errors);
+
+      // Save results to sessionStorage
+      sessionStorage.setItem("wpm", wpm);
+      sessionStorage.setItem("time", timeTaken.toFixed(2));
+      sessionStorage.setItem("errors", errors);
+      sessionStorage.setItem("score", score)
+
+      // Redirect to results page
+      window.location.href = "resultsPage.html";
+  }
+});
+
+// Select all buttons in the virtual keyboard
+const buttons = document.querySelectorAll('button');
+
+// Create Audio objects for the keyboard click sounds
+const clickSound = new Audio('audios/167326__willy_ineedthatapp_com__click.mp3'); // Sound for all keys except space
+const spaceSound = new Audio('audios/spacebar-click-keyboard-199448.mp3'); // Sound for the space bar
+
+// Add event listeners for keydown and keyup
+document.addEventListener('keydown', (event) => {
+  // Handle space bar explicitly
+  const key = event.key === ' ' ? 'Space' : event.key;
+
+  // Find the button with the matching data-key attribute
+  const button = document.querySelector(`button[data-key="${key}"]`);
+
+  if (button) {
+    // Add the "active" class to change the button's appearance
+    button.classList.add('active');
+
+    // Play the appropriate sound
+    if (event.key === ' ') {
+      spaceSound.currentTime = 0; // Reset to start for rapid clicks
+      spaceSound.play();
+    } else {
+      clickSound.currentTime = 0;
+      clickSound.play();
+    }
+  }
+});
+
+document.addEventListener('keyup', (event) => {
+  // Handle space bar explicitly
+  const key = event.key === ' ' ? 'Space' : event.key;
+
+  // Find the button with the matching data-key attribute
+  const button = document.querySelector(`button[data-key="${key}"]`);
+  if (button) {
+    // Remove the "active" class
+    button.classList.remove('active');
+  }
+});
+
+
+
+  } 
+  else if (currentMode === 'p') {
+    const wordBank = [
+    "a", "about", "above", "across", "act", "active", "activity", "add", "afraid", "after", "again", "age", "ago", "agree", "air", 
+    "all", "alone", "along", "already", "always", "am", "amount", "an", "and", "angry", "another", "answer", "any", "anyone", 
+    "anything", "anytime", "appear", "apple", "are", "area", "arm", "army", "around", "arrive", "art", "as", "ask", "at", 
+    "attack", "aunt", "autumn", "away", "baby", "base", "back", "bad", "bag", "ball", "bank", "basket", "bath", "be", "bean", 
+    "bear", "beautiful", "beer", "bed", "bedroom", "behave", "before", "begin", "behind", "bell", "below", "besides", "best", 
+    "better", "between", "big", "bird", "birth", "birthday", "bit", "bite", "black", "bleed", "block", "blood", "blow", "blue", 
+    "board", "boat", "body", "boil", "bone", "book", "border", "born", "borrow", "both", "bottle", "bottom", "bowl", "box", "boy", 
+    "branch", "brave", "bread", "break", "breakfast", "breathe", "bridge", "bright", "bring", "brother", "brown", "brush", "build", 
+    "burn", "business", "bus", "busy", "but", "buy", "by", "cake", "call", "can", "candle", "cap", "car", "card", "care", "careful", 
+    "careless", "carry", "case", "cat", "catch", "central", "century", "certain", "chair", "chance", "change", "chase", "cheap", 
+    "cheese", "chicken", "child", "children", "chocolate", "choice", "choose", "circle", "city", "class", "clever", "clean", "clear", 
+    "climb", "clock", "cloth", "clothes", "cloud", "cloudy", "close", "coffee", "coat", "coin", "cold", "collect", "colour", "comb", 
+    "comfortable", "common", "compare", "come", "complete", "computer", "condition", "continue", "control", "cook", "cool", "copper", 
+    "corn", "corner", "correct", "cost", "contain", "count", "country", "course", "cover", "crash", "cross", "cry", "cup", "cupboard", 
+    "cut", "dance", "dangerous", "dark", "daughter", "day", "dead", "decide", "decrease", "deep", "deer", "depend", "desk", "destroy", 
+    "develop", "die", "different", "difficult", "dinner", "direction", "dirty", "discover", "dish", "direction", "do", "dog", "door", 
+    "double", "down", "draw", "dream", "dress", "drink", "drive", "drop", "dry", "duck", "dust", "duty", "each", "ear", "early", "earn", 
+    "earth", "east", "easy", "eat", "education", "effect", "egg", "eight", "either", "electric", "elephant", "else", "empty", "end", 
+    "enemy", "enjoy", "enough", "enter", "equal", "entrance", "escape", "even", "evening", "event", "ever", "every", "everyone", 
+    "exact", "everybody", "examination", "example", "except", "excited", "exercise", "expect", "expensive", "explain", "extremely", 
+    "eye", "face", "fact", "fail", "fall", "false", "family", "famous", "far", "farm", "father", "fast", "fat", "fault", "fear", "feed", 
+    "feel", "female", "fever", "few", "fight", "fill", "film", "find", "fine", "finger", "finish", "fire", "first", "fit", "five", "fix", 
+    "flag", "flat", "float", "floor", "flour", "flower", "fly", "fold", "food", "fool", "foot", "football", "for", "force", "foreign", 
+    "forest", "forget", "forgive", "fork", "form", "fox", "four", "free", "freedom", "freeze", "fresh", "friend", "friendly", "from", 
+    "front", "fruit", "full", "fun", "funny", "furniture", "further", "future", "game", "garden", "gate", "general", "gentleman", "get", 
+    "gift", "give", "glad", "glass", "go", "goat", "god", "gold", "good", "goodbye", "grandfather", "grandmother", "grass", "grave", 
+    "great", "green", "grey", "ground", "group", "grow", "gun", "hair", "half", "hall", "hammer", "hand", "happen", "happy", "hard", 
+    "hat", "hate", "have", "he", "head", "healthy", "hear", "heavy", "hello", "help", "heart", "heaven", "height", "help", "hen", "her", 
+    "here", "hers", "hide", "high", "hill", "him", "his", "hit", "hobby", "hold", "hole", "holiday", "home", "hope", "horse", "hospital", 
+    "hot", "hotel", "house", "how", "hundred", "hungry", "hour", "hurry", "husband", "hurt", "I", "ice", "idea", "if", "important", "in", 
+    "increase", "inside", "into", "introduce", "invent", "iron", "invite", "is", "island", "it", "its", "jelly", "job", "join", "juice", 
+    "jump", "just", "keep", "key", "kill", "kind", "king", "kitchen", "knee", "knife", "knock", "know", "ladder", "lady", "lamp", "land", 
+    "large", "last", "late", "lately", "laugh", "lazy", "lead", "leaf", "learn", "leave", "leg", "left", "lend", "length", "less", 
+    "lesson", "let", "letter", "library", "lie", "life", "light", "like", "lion", "lip", "list", "listen", "little", "live", "lock", 
+    "lonely", "long", "look", "lose", "lot", "love", "low", "lower", "luck", "machine", "main", "make", "male", "man", "many", "map", 
+    "mark", "market", "marry", "matter", "may", "me", "meal", "mean", "measure", "meat", "medicine", "meet", "member", "mention", 
+    "method", "middle", "milk", "million", "mind", "minute", "miss", "mistake", "mix", "model", "modern", "moment", "money", "monkey", 
+    "month", "moon", "more", "morning", "most", "mother", "mountain", "mouth", "move", "much", "music", "must", "my", "name", "narrow", 
+    "nation", "nature", "near", "nearly", "neck", "need", "needle", "neighbour", "neither", "net", "never", "new", "news", "newspaper", 
+    "next", "nice", "night", "nine", "no", "noble", "noise", "none", "nor", "north", "nose", "not", "nothing", "notice", "now", "number", 
+    "obey", "object", "ocean", "of", "off", "offer", "office", "often", "oil", "old", "on", "one", "only", "open", "opposite", "or", 
+    "orange", "order", "other", "our", "out", "outside", "over", "own", "page", "pain", "paint", "pair", "pan", "paper", "parent", 
+    "park", "part", "partner", "party", "pass", "past", "path", "pay", "peace", "pen", "pencil", "people", "pepper", "per", "perfect", 
+    "period", "person", "petrol", "photograph", "piano", "pick", "picture", "piece", "pig", "pin", "pink", "place", "plane", "plant", 
+    "plastic", "plate", "play", "please", "pleased", "plenty", "pocket", "point", "poison", "police", "polite", "pool", "poor", "popular", 
+    "position", "possible", "potato", "pour", "power", "present", "press", "pretty", "prevent", "price", "prince", "prison", "private", 
+    "prize", "probably", "problem", "produce", "promise", "proper", "protect", "provide", "public", "pull", "punish", "pupil", "push", 
+    "put", "queen", "question", "quick", "quiet", "quite", "radio", "rain", "rainy", "raise", "reach", "read", "ready", "real", "really", 
+    "receive", "record", "red", "remember", "remind", "remove", "rent", "repair", "repeat", "reply", "report", "rest", "restaurant", 
+    "result", "return", "rice", "rich", "ride", "right", "ring", "rise", "road", "rob", "rock", "room", "round", "rubber", "rude", "rule", 
+    "ruler", "run", "rush", "sad", "safe", "sail", "salt", "same", "sand", "save", "say", "school", "science", "scissors", "search", 
+    "seat", "second", "see", "seem", "sell", "send", "sentence", "serve", "seven", "several", "sex", "shade", "shadow", "shake", "shape", 
+    "share", "sharp", "she", "sheep", "sheet", "shelf", "shine", "ship", "shirt", "shoe", "shoot", "shop", "short", "should", "shoulder", 
+    "shout", "show", "sick", "side", "signal", "silence", "silly", "silver", "similar", "simple", "single", "since", "sing", "sink", 
+    "sister", "sit", "six", "size", "skill", "skin", "skirt", "sky", "sleep", "slip", "slow", "smoke", "small", "smell", "smile", "smoke", 
+    "snow", "so", "soap", "sock", "soft", "some", "someone", "something", "sometimes", "son", "soon", "sorry", "sound", "soup", "south", 
+    "space", "speak", "special", "speed", "spell", "spend", "spoon", "sport", "spread", "spring", "square", "stamp", "stand", "star", 
+    "start", "station", "stay", "steal", "steam", "step", "still", "stomach", "stone", "stop", "store", "storm", "story", "strange", 
+    "street", "strong", "structure", "student", "study", "stupid", "subject", "substance", "successful", "such", "sudden", "sugar", 
+    "suitable", "summer", "sun", "sunny", "support", "sure", "surprise", "sweet", "swim", "sword", "table", "take", "talk", "tall", "taste", 
+    "taxi", "tea", "teach", "team", "tear", "telephone", "television", "tell", "ten", "tennis", "terrible", "test", "than", "that", "the", 
+    "their", "then", "there", "therefore", "these", "thick", "thin", "thing", "think", "third", "this", "though", "threat", "three", 
+    "tidy", "tie", "title", "to", "today", "toe", "together", "tomorrow", "tonight", "too", "tool", "tooth", "top", "total", "touch", 
+    "town", "train", "tram", "travel", "tree", "trouble", "true", "trust", "twice", "try", "turn", "type", "uncle", "under", "understand", 
+    "unit", "until", "up", "use", "useful", "usual", "usually", "vegetable", "very", "village", "voice", "visit", "wait", "wake", "walk", 
+    "want", "warm", "wash", "waste", "watch", "water", "way", "we", "weak", "wear", "weather", "wedding", "week", "weight", "welcome", 
+    "well", "west", "wet", "what", "wheel", "when", "where", "which", "while", "white", "who", "why", "wide", "wife", "wild", "will", 
+    "win", "wind", "window", "wine", "winter", "wire", "wise", "wish", "with", "without", "woman", "wonder", "word", "work", "world", 
+    "worry", "worst", "write", "wrong", "year", "yes", "yesterday", "yet", "you", "young", "zero", "zoo"
+  ];
+  // DOM Elements
+const textToType = document.getElementById("text-to-type");
+const userInput = document.getElementById("user-input");
+const wordsCheckbox = document.getElementById("words");
+const timeCheckbox = document.getElementById("timed");
+
+// Generate Random Text
+const generateRandomText = (wordCount) => {
+  const words = [];
+  for (let i = 0; i < wordCount; i++) {
+    words.push(wordBank[Math.floor(Math.random() * wordBank.length)]);
+  }
+  return words.join(" ");
+};
+
+// Initialize Game Variables
+let targetText = "";
+let startTime = null;
+let errors = 0;
+let timer = null;
+
+// Initialize Game Based on Mode
+if (wordsCheckbox.checked) {
+  targetText = generateRandomText(25); // Word Limit Mode: 25 words
+} else if (timeCheckbox.checked) {
+  targetText = generateRandomText(250); // Timed Mode: Large number of words
+}
+textToType.innerHTML = targetText;
+
+// Event Listener for Typing
+userInput.addEventListener("input", () => {
+  if (!startTime) {
+    startTime = new Date();
+    if (timeCheckbox.checked) {
+      // Start timer for Timed mode
+      timer = setTimeout(() => {
+        endTimedMode();
+      }, 60000); // 60 seconds
+    }
+  }
+
+  const typedText = userInput.value;
+  let updatedHTML = "";
+  errors = 0;
+
+  for (let i = 0; i < targetText.length; i++) {
+    const correctChar = targetText[i];
+    const typedChar = typedText[i];
+
+    if (typedChar === undefined) {
+        // Cursor at current typing position
+        if (i === typedText.length) {
+            updatedHTML += `<span style="border-left: 2px solid orange; color: #734a00; padding-left: 1px; margin-left: -1px; display: inline-block;">${correctChar}</span>`;
+        } else {
+            updatedHTML += `<span style="color: #734a00;">${correctChar}</span>`;
+        }
+    } else if (typedChar === correctChar) {
+        // Correctly typed character
+        updatedHTML += `<span style="color: #FFA500;">${correctChar}</span>`;
+    } else {
+        // Incorrectly typed character
+        updatedHTML += `<span style="color: #ff4757;">${correctChar}</span>`;
+    }
+}
+
+
+  textToType.innerHTML = updatedHTML;
+
+  // Word Limit Mode: Check if typing is complete
+  if (wordsCheckbox.checked && typedText.length === targetText.length) {
+    endWordLimitMode();
+  }
+});
+
+// End Game Functions
+const endWordLimitMode = () => {
+  const endTime = new Date();
+  const timeTaken = (endTime - startTime) / 1000; // Time in seconds
+  const wpm = Math.round((targetText.split(" ").length / timeTaken) * 60);
+
+  // Save results to sessionStorage
+  sessionStorage.setItem("wpm", wpm);
+  sessionStorage.setItem("time", timeTaken.toFixed(2));
+  sessionStorage.setItem("errors", errors);
+
+  // Redirect to results page
+  window.location.href = "resultsPage.html";
+};
+
+const endTimedMode = () => {
+  const typedText = userInput.value;
+  const wordCount = typedText.split(" ").length;
+  const wpm = Math.round((wordCount / 60) * 60); // WPM over 60 seconds
+
+  // Save results to sessionStorage
+  sessionStorage.setItem("wpm", wpm);
+  sessionStorage.setItem("errors", errors);
+
+  // Redirect to results page
+  window.location.href = "resultsPage.html";
+};
+}
+
+// Select all buttons in the virtual keyboard
+const buttons = document.querySelectorAll('button');
+
+// Create Audio objects for the keyboard click sounds
+const clickSound = new Audio('audios/167326__willy_ineedthatapp_com__click.mp3'); // Sound for all keys except space
+const spaceSound = new Audio('audios/spacebar-click-keyboard-199448.mp3'); // Sound for the space bar
+
+// Add event listeners for keydown and keyup
+document.addEventListener('keydown', (event) => {
+  // Handle space bar explicitly
+  const key = event.key === ' ' ? 'Space' : event.key;
+
+  // Find the button with the matching data-key attribute
+  const button = document.querySelector(`button[data-key="${key}"]`);
+
+  if (button) {
+    // Add the "active" class to change the button's appearance
+    button.classList.add('active');
+
+    // Play the appropriate sound
+    if (event.key === ' ') {
+      spaceSound.currentTime = 0; // Reset to start for rapid clicks
+      spaceSound.play();
+    } else {
+      clickSound.currentTime = 0;
+      clickSound.play();
+    }
+  }
+});
+
+document.addEventListener('keyup', (event) => {
+  // Handle space bar explicitly
+  const key = event.key === ' ' ? 'Space' : event.key;
+
+  // Find the button with the matching data-key attribute
+  const button = document.querySelector(`button[data-key="${key}"]`);
+  if (button) {
+    // Remove the "active" class
+    button.classList.remove('active');
+  }
+});
+  }
+
+
+function resetMode() {
+  console.log('No mode active');
+  //Reset logic when no mode is active
+  document.body.style.backgroundColor = ''; // Reset background color
+}
+
+    </script>
+    <div class="typing-game">
+        
+        <div id="text-to-type"></div>
+        
+        <textarea id="user-input" autocomplete="false" spellcheck="false"></textarea>
+        
+    </div>
+    
+    <section class="screen-keyboard-desktop">
+        <div class="keys">
+            <!-- Row 1 -->
+            <button class="accent" data-key="`">`</button>
+            <button class="accent" data-key="1">1</button>
+            <button class="accent" data-key="2">2</button>
+            <button class="accent" data-key="3">3</button>
+            <button class="accent" data-key="4">4</button>
+            <button class="accent" data-key="5">5</button>
+            <button class="accent" data-key="6">6</button>
+            <button class="accent" data-key="7">7</button>
+            <button class="accent" data-key="8">8</button>
+            <button class="accent" data-key="9">9</button>
+            <button class="accent" data-key="0">0</button>
+            <button class="accent" data-key="-">-</button>
+            <button class="accent" data-key="=">=</button>
+            <button class="accent special" data-key="Backspace">Backspace</button>
+    
+            <!-- Row 2 -->
+            <button class="accent special" data-key="Tab">Tab</button>
+            <button data-key="q">q</button>
+            <button data-key="w">w</button>
+            <button data-key="e">e</button>
+            <button data-key="r">r</button>
+            <button data-key="t">t</button>
+            <button data-key="y">y</button>
+            <button data-key="u">u</button>
+            <button data-key="i">i</button>
+            <button data-key="o">o</button>
+            <button data-key="p">p</button>
+            <button data-key="[">[</button>
+            <button data-key="]">]</button>
+            
+    
+            <!-- Row 3 -->
+            <button class="accent special" data-key="CapsLock">CapsLock</button>
+            <button data-key="a">a</button>
+            <button data-key="s">s</button>
+            <button data-key="d">d</button>
+            <button data-key="f">f</button>
+            <button data-key="g">g</button>
+            <button data-key="h">h</button>
+            <button data-key="j">j</button>
+            <button data-key="k">k</button>
+            <button data-key="l">l</button>
+            <button data-key=";">;</button>
+            <button data-key="'">'</button>
+            <button class="accent special" data-key="Enter">Enter</button>
+    
+            <!-- Row 4 -->
+            <button class="accent special" data-key="Shift">Shift</button>
+            <button data-key="z">z</button>
+            <button data-key="x">x</button>
+            <button data-key="c">c</button>
+            <button data-key="v">v</button>
+            <button data-key="b">b</button>
+            <button data-key="n">n</button>
+            <button data-key="m">m</button>
+            <button data-key=",">,</button>
+            <button data-key=".">.</button>
+            <button data-key="/">/</button>
+            <button class="accent special" data-key="Shift">Shift</button>
+    
+            <!-- Row 5 -->
+            <button class="accent special" data-key="Ctrl">Ctrl</button>
+            <button class="accent special" data-key="Win">Win</button>
+            <button class="accent special" data-key="Alt">Alt</button>
+            <button class="space special" data-key="Space"></button>
+            <button class="accent special" data-key="Alt">Alt</button>
+            <button class="accent special" data-key="Ctrl">Ctrl</button>
+        </div>
+    </section>
+</body>
+</html>
+
+

@@ -1,0 +1,522 @@
+/* General Styles */
+* {
+  font-family: "Inter", sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #313030;
+  background-image: url("img/scalitoground.jpg");
+  /*color: #ffffff;
+  text-shadow: -1px 1px 0 #b5b5b5, 1px 1px 0 #5c5c5c, 1px -1px 0 #000, -1px -1px 0 #000;*/
+  text-align: center;
+  padding-top: 20px;
+}
+
+/* === removing default button style === */
+.ptype-button {
+  margin: 0;
+  height: auto;
+  background: transparent;
+  padding: 0;
+  border: none;
+  cursor: pointer;
+}
+
+/* button styling */
+.ptype-button {
+  --border-right: 6px;
+  --text-stroke-color: rgb(255, 255, 255);
+  --animation-color: #ffffff; /* Orange for animation */
+  --fs-size: 2.5em;
+  letter-spacing: 3px;
+  text-decoration: none;
+  font-size: var(--fs-size);
+  font-family: "Arial", sans-serif;
+  position: relative;
+  color: transparent;
+  -webkit-text-stroke: 1px var(--text-stroke-color);
+  display: inline-block;
+}
+
+/* this is the text, when you hover on button */
+.hover-text {
+  position: absolute;
+  box-sizing: border-box;
+  content: attr(data-text);
+  color: var(--animation-color);
+  width: 0%;
+  inset: 0;
+  border-right: var(--border-right) solid var(--animation-color);
+  overflow: hidden;
+  transition: 0.5s;
+  -webkit-text-stroke: 1px var(--animation-color);
+}
+
+/* hover */
+.ptype-button:hover .hover-text {
+  width: 100%;
+  filter: drop-shadow(0 0 23px var(--animation-color));
+}
+
+/* Styling for the banner */
+
+.ptype-logo {
+  text-decoration: none;
+}
+
+
+/* Banner Styles */
+
+
+
+
+/* Sub-Banner */
+.sub-banner {
+  margin: 30px auto;
+  max-width: 80%;
+  padding: 15px 20px;
+  background-color: #1e1e1e;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Grid Containers */
+.grid-container,
+.grid-container2 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  margin-top: 30px;
+  padding: 20px;
+  text-align: center;
+}
+
+/* Grid Items */
+.grid-container div {
+  background-color: #1e1e1e;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.grid-container2 div {
+  background-color: #ffffff;
+  padding: 12px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  color: black;
+}
+
+.grid-container2 div:hover {
+  background-color: #292929;
+  transition: background-color 0.3s ease;
+  color: white;
+}
+
+/* Specific Grid Items */
+.grid-item-streaks,
+.grid-item-stateliner,
+.grid-item-tiger,
+.grid-item-skenes,
+.grid-item-dunn,
+.grid-item-johnp {
+  display: flex;
+  padding: 0.875em 2em;
+  font-family: inherit;
+  color: #fff;
+  text-decoration: none;
+  transition: background-color 0.3s;
+  place-content: center;
+}
+
+.grid-item-streaks {
+  background: linear-gradient(90deg, #3f51b5, transparent) #0073ff;
+}
+
+.grid-item-streaks:hover,
+.grid-item-streaks:focus {
+  background-color: #ffffff;
+  color: #2600ff;
+}
+
+.grid-item-stateliner {
+  background: linear-gradient(90deg, maroon, transparent) #3a6d4d;
+}
+
+.grid-item-stateliner:hover,
+.grid-item-stateliner:focus {
+  background-color: #878787;
+  color: rgb(202, 12, 12);
+}
+
+.grid-item-tiger {
+  background: linear-gradient(90deg, rgb(0, 0, 0), transparent) #3a6d4d;
+  color: #ec6600;
+}
+
+.grid-item-tiger:hover,
+.grid-item-tiger:focus {
+  background-color: #ff7b00;
+  color: rgb(0, 0, 0);
+}
+
+.grid-item-skenes {
+  background: linear-gradient(90deg, rgb(0, 0, 0), transparent) #3a6d4d;
+  color: #fff000;
+}
+
+.grid-item-skenes:hover,
+.grid-item-skenes:focus {
+  background-color: #fff000;
+  color: rgb(0, 0, 0);
+}
+
+.grid-item-dunn {
+  background: linear-gradient(90deg, rgb(143, 0, 186), transparent) #3a6d4d;
+  color: #fff000;
+}
+
+.grid-item-dunn:hover,
+.grid-item-dunn:focus {
+  background-color: #fff000;
+  color: rgb(0, 0, 0);
+}
+
+.grid-item-johnp {
+  background: linear-gradient(90deg, rgb(255, 82, 206), transparent) #3a6d4d;
+  color: #ff75aa;
+}
+
+.grid-item-johnp:hover,
+.grid-item-johnp:focus {
+  background-color: #ff00cc;
+  color: rgb(0, 0, 0);
+}
+
+/* Image Background Items */
+.grid-item-scalito {
+  background-image: url("img/scalito.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.grid-item-scalito:hover,
+.grid-item-scalito:focus {
+  color: rgb(255, 100, 100);
+}
+
+.grid-item-sweden {
+  background-image: url("img/sweden.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: black;
+}
+
+.grid-item-sweden:hover,
+.grid-item-sweden:focus {
+  color: rgb(100, 255, 255);
+}
+
+.grid-item-freedom {
+  background-image: url("img/freedom.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.grid-item-freedom:hover,
+.grid-item-freedom:focus {
+  color: rgb(45, 45, 45);
+}
+
+/* Typing Game */
+
+
+/* Font Styles */
+.grid-item-font1 {
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 20px;
+}
+
+.grid-item-font2 {
+  font-family: monospace;
+  font-size: 20px;
+}
+
+.grid-item-font3 {
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-size: 20px;
+}
+
+.grid-item-font4 {
+  font-family: "Eater", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.grid-item-font5 {
+  font-family: "Bokor", system-ui;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 20px;
+}
+
+.grid-item-font6 {
+  font-family: "Jaro", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 30px;
+}
+
+.grid-item-font7 {
+  font-family: "Lacquer", system-ui;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 30px;
+}
+
+.grid-item-font8 {
+  font-family: "Press Start 2P", system-ui;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.grid-item-font9 {
+  font-family: "Rye", serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 25px;
+}
+.grid-item-font10 {
+  font-family: "Rubik Moonrocks", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 30px
+}
+input[type="text"] {
+  width: 100%;
+  padding: 10px;
+  font-size: 1rem;
+  border: none;
+  border-bottom: 2px solid #444;
+  background: transparent;
+  color: #e0e0e0;
+  outline: none;
+}
+
+input[type="text"]:focus {
+  border-bottom: 2px solid #f39c12;
+  transition: border-color 0.3s ease;
+}
+
+/* Screen Keyboard */
+section.screen-keyboard-desktop {
+  display: grid;
+  grid-template-areas:
+    "row1"
+    "row2"
+    "row3"
+    "row4"
+    "row5";
+  gap: 8px;
+  justify-content: center;
+  margin: 20px auto;
+}
+
+
+
+.keys { 
+  display: grid; 
+  grid-gap: 5px; 
+  /* Spacing between keys */ 
+  grid-template-columns: repeat(15, 1fr); 
+  /* 15 columns for layout flexibility */ 
+  justify-content: center; 
+} button { 
+  width: 100%; /* Take full space within the grid cell */ 
+  height: 50px; 
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+  font-family: "Open Sans", sans-serif; 
+  font-size: 16px; 
+  font-weight: 600; 
+  color: #ffffff; 
+  background-color: maroon; 
+  border: 2px solid #3d0000;
+  border-radius: 5px; 
+  background-image: url("img/scalito2.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 8px; 
+  background-size:auto;
+  cursor: pointer; 
+  box-shadow: 0 2px 4px rgba(13, 5, 5, 0.317); 
+} 
+button.accent { 
+  background-color: maroon; 
+} 
+button.active {
+  background-color: rgb(44, 44, 44);
+  color: rgb(255, 0, 0);
+  box-shadow: 0 0 10px #ff0000;
+
+}
+button.special { 
+  grid-column: span 2; 
+ }
+button.space { 
+  grid-column: span 5; 
+} 
+button:disabled { 
+  background: #ddd; cursor: not-allowed; 
+} 
+
+  .banner { 
+    background: maroon;
+    color: #eaeaea; 
+    padding: 15px 20px;
+    display: flex; 
+    align-items: center; 
+    justify-content: space-between; 
+    border-bottom: 2px solid #540000; 
+  } 
+.banner a { 
+  color: #232323; 
+  font-size: 1.5rem; 
+  text-decoration: none; 
+  font-weight: bold; 
+} 
+.banner a:hover {
+   color: #450000; 
+   transition: color 0.3s ease-in-out; 
+  } 
+
+.sub-banner { 
+  background-color: #1e1e1e; 
+  color: #eaeaea; 
+  padding: 20px; 
+  margin: 30px auto; 
+  max-width: 90%; 
+  border-radius: 10px; 
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4); 
+  text-align: left; 
+} 
+.typing-game { 
+  margin: 20px auto; 
+  max-width: 90%; 
+  padding: 30px; 
+  background-color: maroon;
+  background-image: url("img/scalito2.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 8px; 
+  background-size:auto;
+  box-shadow: 0 4px 8px rgba(148, 0, 0, 0.4);
+  color: rgb(198, 198, 198);
+  position: relative;
+ } 
+ #user-input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 30px;
+  margin:15px;
+  font-size: 40px;
+  color: transparent; /* Typing text color */
+  background: transparent;
+  outline: none; /* Remove outline for cleaner look */
+  border: none; /* Remove border for clean look */
+  width: 100%;
+}
+ #text-to-type {
+  font-size: 30px;
+  font-weight: bold;
+  color: #ffffff;
+  margin: 10px 0;
+  text-align:left;
+  position: relative;
+  top: 0;
+  left: 0;
+  pointer-events: none; 
+}
+
+textarea { 
+  width: 100%; 
+  padding: 15px; 
+  background: #ffffff; 
+  color: #363636; 
+  border: 2px solid #454545; 
+  border-radius: 6px; 
+  resize: none; 
+  transition: border-color 0.3s ease;
+ } 
+ textarea:focus 
+ { border-color: #2e55ff; }
+
+
+/* From Uiverse.io by thomas-m-njuguna */ 
+.header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: auto;
+  background-color: maroon;
+  margin: 0;
+  border: 3px solid #202020;
+  border-radius: 10px;
+}
+.Tbutton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 10px;
+  border-radius: 5px;
+  position: relative;
+  transition: background-color 0.2s ease;
+}
+.Tbutton:hover .tooltip {
+  background-color: rgba(255, 255, 255, 0.1);
+  visibility: visible;
+  opacity: 1;
+}
+.settings-btn {
+  display: block;
+  transition: transform 0.3s ease-in;
+}
+.settings-btn:hover {
+  transform: rotate(60deg);
+}
+.settings-btn:active {
+  animation: rot 1s linear infinite;
+}
+@keyframes rot {
+  from {
+    transform: rotate(-100deg);
+  }
+  to {
+    transform: rotate(180deg);
+  }
+}
+.tooltip {
+  visibility: hidden;
+  width: 120px;
+  background-color: black;
+  color: #000000;
+  text-align: center;
+  border-radius: 5px;
+  padding: 5px;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  margin-left: -60px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bokor&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Eater&family=Jaro:opsz@6..72&family=Lacquer&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Eater&family=Jaro:opsz@6..72&family=Lacquer&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Eater&family=Jaro:opsz@6..72&family=Lacquer&family=Press+Start+2P&family=Rubik+Moonrocks&family=Rye&display=swap" rel="stylesheet"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ptype</title>
+    <link rel="stylesheet" href="tiger.css">
+</head>
+<body>
+    <div class="banner">
+        <a href="index.html" class="ptype-logo">
+            <button class="ptype-button" data-text="ptype">
+              <span class="actual-text">&nbsp;ptype&nbsp;</span>
+              <span aria-hidden="true" class="hover-text">&nbsp;ptype&nbsp;</span>
+            </button>
+          </a>
+    </div>
+    <div class="themes-header">
+        Themes
+    </div>
+    <div class="grid-container">
+        <div class="grid-item-streaks" id="grid-item-streaks" >Streaks</div>
+        <div class="grid-item-stateliner" id="grid-item-stateliner">Stateliner</div>
+        <div class="grid-item-tiger" id="grid-item-tiger">Tiger</div>
+        <div class="grid-item-scalito" id="grid-item-scalito">Scalito</div>
+        <div class="grid-item-skenes" id="grid-item-skenes">Skenes</div>
+        <div class="grid-item-dunn" id="grid-item-dunn">Dunn</div>
+        <div class="grid-item-sweden" id="grid-item-sweden">Sweden</div>
+        <div class="grid-item-freedom" id="grid-item-freedom">Freedom</div>
+        <div class="grid-item-johnp" id="grid-item-johnp">John Pork</div>
+        <div class="grid-item-tomp" id="grid-item-tomp">Tom P</div>
+    </div>
+    <div class="font-header">Fonts</div>
+    <div class="grid-container2">  
+        <div class="grid-item-font1" >Thomas New Roman</div>
+        <div class="grid-item-font2">Monoscala</div>
+        <div class="grid-item-font3">Felix Gothic</div>
+        <div class="grid-item-font4">Scalito</div>
+        <div class="grid-item-font5">Lord Meyer</div>
+        <div class="grid-item-font6">Low Taper Pork</div>
+        <div class="grid-item-font7">Scalito Pork</div>
+        <div class="grid-item-font8">Tom Scala</div>
+        <div class="grid-item-font9">Deiterscalito</div>
+        <div class="grid-item-font10">Tom P</div>
+      </div>
+</body>
+<script>
+    document.querySelector(".grid-container2").addEventListener("click", (event) => {
+    const target = event.target;
+
+    // Ensure clicked element is a grid-item
+    if (target.className.startsWith("grid-item-font")) {
+        const newFont = target.getAttribute("data-font");
+
+        // Change font-family of the entire page
+        document.body.style.fontFamily = newFont;
+    }
+});
+</script>
+<script>
+    const streaks = document.getElementById('grid-item-streaks');
+    streaksLink = 'streaks_theme.html';
+
+    streaks.addEventListener('click', () => {
+    // Redirect the browser to the target link
+    window.location.href = streaksLink;
+    });
+    const stateliner = document.getElementById('grid-item-stateliner');
+    stateLink = 'stateliner_theme.html';
+    stateliner.addEventListener('click', () => {
+    // Redirect the browser to the target link
+    window.location.href = stateLink;
+    });
+    const tiger = document.getElementById('grid-item-tiger');
+    tigerLink = 'index.html';
+    tiger.addEventListener('click', () => {
+    // Redirect the browser to the target link
+    window.location.href = tigerLink;
+    });
+    const scalito = document.getElementById('grid-item-scalito');
+    scalitoLink = 'scalito_theme.html';
+    scalito.addEventListener('click', () => {
+    // Redirect the browser to the target link
+    window.location.href = scalitoLink;
+    });
+    const skenes = document.getElementById('grid-item-skenes');
+    const dunn = document.getElementById('grid-item-dunn');
+    const sweden = document.getElementById('grid-item-sweden');
+    const freedom = document.getElementById('grid-item-freedom');
+    const john_pork = document.getElementById('grid-item-johnp');
+    const tomp = document.getElementById('grid-item-tomp');
+    tompLink = 'tomp_theme.html';
+    tomp.addEventListener('click', () => {
+    // Redirect the browser to the target link
+    window.location.href = tompLink;
+    });
+
+</script>
+</html>

@@ -1,0 +1,132 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+      * {
+    box-sizing: border-box;
+    text-align: center;
+}
+
+body, html {
+    height: 100%;
+    overflow: hidden;
+    background-color: #282c34;
+}
+
+.container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    padding-left: 48%;
+    padding-right: 45%;
+    padding-bottom: 25%;
+    padding-top: 20%;
+}
+
+.flying-question {
+    position: absolute;
+    font-size: 30px;
+    color: white;
+    animation: fly 5s linear infinite;
+    opacity: 0;
+}
+
+@keyframes fly {
+    0% {
+        transform: translate(0, 0);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(var(--x), var(--y));
+        opacity: 0;
+    }
+}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- "???" elements will be dynamically added here by JavaScript -->
+    </div>
+
+    <script>
+      function createFlyingQuestions() {
+    const container = document.querySelector('.container');
+    const numQuestions = 10; // Number of "???" symbols
+
+    for (let i = 0; i < numQuestions; i++) {
+        const questionMark = document.createElement('div');
+        questionMark.classList.add('flying-question');
+        var wonder = Math.random() * 70;
+
+        if(wonder<30){
+        questionMark.textContent = '???';
+        }
+        else if (wonder < 31)
+        {
+          questionMark.textContent = "why are you here?"
+        }
+        else if (wonder < 32)
+        {
+          questionMark.textContent = "Im a scalito! -Crian Bollum"
+        }
+        else if (wonder < 33)
+        {
+          questionMark.textContent = "The Scalitoverse is still massive -Barty V"
+        }
+        else if (wonder < 34)
+        {
+          questionMark.textContent = "Freaks Vs. Scalitos"
+        }
+        else if (wonder < 35)
+        {
+          questionMark.textContent = "Do you miss me?"
+        }
+        else if (wonder < 36)
+        {
+          questionMark.textContent = "I am the Mythical Creepypasta! -Dylan Ward"
+        }
+        else if (wonder < 37)
+        {
+          questionMark.textContent = "How much is the AC Dollar Bill worth?"
+        }
+        else if (wonder < 38)
+        {
+          questionMark.textContent = "Stop using buzzwords. -Sean B"
+        }
+        else if (wonder < 39)
+        {
+          questionMark.textContent = "Deitermas is on 12/25/24"
+        }
+        else if (wonder < 40)
+        {
+          questionMark.textContent = "Nick Ztaada"
+        }
+        else{
+          questionMark.textContent = "???"
+        }
+
+        // Set random position and animation duration
+        const x = Math.random() * 100 - 50; // Random horizontal direction
+        const y = Math.random() * 100 - 50; // Random vertical direction
+        const animationDuration = Math.random() * 6 + 4; // Duration between 2s to 5s
+
+        questionMark.style.setProperty('--x', `${x}vw`);
+        questionMark.style.setProperty('--y', `${y}vh`);
+        questionMark.style.animationDuration = `${animationDuration}s`;
+
+        container.appendChild(questionMark);
+    }
+}
+
+// Run the function to create flying "???"
+createFlyingQuestions();
+
+// Optionally, add more "???" every 2 seconds
+setInterval(createFlyingQuestions, 10000);
+    </script>
+</body>
+</html>
